@@ -10,7 +10,7 @@
               <h6 class="card-subtitle mb-2 text-body-secondary">{{ choice.author }}</h6>
               <p class="card-text">{{ choice.description }}</p>
               <h6 class="card-subtitle mb-2 text-body-secondary">{{ choice.date_updated|date:"F d, Y" }}</h6>
-              <a href="#" class="card-link">Go to this recipe</a>
+              <a href="{% url 'choices-detail' choice.pk %}" class="card-link">Go to this recipe</a>
             </div>
           </div>
     {% endfor %}
