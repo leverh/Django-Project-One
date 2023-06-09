@@ -12,6 +12,5 @@ def register(request):
             messages.success(request, f'Account created for {username}!')
             return redirect('choices-home')
     else:
-            messages.error(request, f'Error creating account!')
             form = forms.UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
