@@ -8,8 +8,8 @@
             <div class="card-body">
               <h5 class="card-title">{{ choice.title }}</h5>
               <h6 class="card-subtitle mb-2 text-body-secondary">{{ choice.author }}</h6>
-              <p class="card-text">{{ choice.preparation }}</p>
-              <h6 class="card-subtitle mb-2 text-body-secondary">{{ choice.date_posted }}</h6>
+              <p class="card-text">{{ choice.description }}</p>
+              <h6 class="card-subtitle mb-2 text-body-secondary">{{ choice.date_updated|date:"F d, Y" }}</h6>
               <a href="#" class="card-link">Go to this recipe</a>
             </div>
           </div>

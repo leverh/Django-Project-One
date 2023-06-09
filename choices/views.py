@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponse
+from . import models
 
 choices = [
     {
@@ -29,6 +30,7 @@ choices = [
 
 # Create your views here.
 def home(request):
+    choices = models.Choice.objects.all()
     context = {
         'choices': choices
     }
