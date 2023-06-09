@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from . import models
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
@@ -21,6 +21,14 @@ class ChoiceDetailView(DetailView):
     model = models.Choice
 
 class ChoiceCreateView(LoginRequiredMixin, CreateView):
+    model = models.Choice
+    fields = ['title', 'description']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+class ChoiceUpdateView(LoginRequiredMixin, UpdateView):
     model = models.Choice
     fields = ['title', 'description']
 
