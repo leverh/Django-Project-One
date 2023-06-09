@@ -19,5 +19,13 @@ class ChoiceListView(ListView):
 class ChoiceDetailView(DetailView):
     model = models.Choice
 
+class ChoiceCreateView(CreateView):
+    model = models.Choice
+    fields = ['title', 'description']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 def about(request):
     return render(request, 'choices/about.html', {'title': 'About'})
