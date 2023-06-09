@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from . import models
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 def home(request):
@@ -19,7 +20,7 @@ class ChoiceListView(ListView):
 class ChoiceDetailView(DetailView):
     model = models.Choice
 
-class ChoiceCreateView(CreateView):
+class ChoiceCreateView(LoginRequiredMixin, CreateView):
     model = models.Choice
     fields = ['title', 'description']
 
