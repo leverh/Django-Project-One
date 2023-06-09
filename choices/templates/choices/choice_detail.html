@@ -12,6 +12,11 @@
               <h6 class="card-subtitle mb-2 text-body-secondary">{{ object.date_updated|date:"F d, Y" }}</h6>
             </div>
           </div>
+
+        <div class="col-4">
+          <a class="btn btn-outline-info" href="{ url 'choices-update' object.id %}">Update</a>
+          <a class="btn btn-outline-danger" href="{ url 'choices-delete' object.id %}">Delete</a>
+        </div>
     
 
 {% endblock content %} 

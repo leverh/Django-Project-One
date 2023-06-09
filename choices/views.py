@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from . import models
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
@@ -41,6 +41,16 @@ class ChoiceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+    
+class ChoiceDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = models.Choice
+    success_url = '/'
+
+    def test_func(self):
+        choice = self.get_object()
+        if self.request.user == choice.author:
+            return True
+        return False
 
 def about(request):
     return render(request, 'choices/about.html', {'title': 'About'})
