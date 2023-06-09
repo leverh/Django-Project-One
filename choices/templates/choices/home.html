@@ -3,15 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Choices</title>
+    {% endif %}
 </head>
 <body>
     <h1>Choices- Home</h1>
 
     {% for choice in choices %}
         <h3>{{ choice.title }}</h3>
-        <p>{{ choice.author }} | {{ choice.date.posted }}</p>
-        <p>{{ choice.directions }}</p>
+        <p>{{ choice.author }}, {{ choice.date_posted }}</p>
+        <p>{{ choice.preparation }}</p>
     {% endfor %}
 
     
