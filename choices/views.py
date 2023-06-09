@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from . import models
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 def home(request):
@@ -28,9 +28,15 @@ class ChoiceCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
-class ChoiceUpdateView(LoginRequiredMixin, UpdateView):
+class ChoiceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = models.Choice
     fields = ['title', 'description']
+
+    def test_func(self):
+        choice = self.get_object()
+        if self.request.user == choice.author:
+            return True
+        return False
 
     def form_valid(self, form):
         form.instance.author = self.request.user
