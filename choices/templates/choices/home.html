@@ -6,9 +6,9 @@
     {% for choice in choices %}
         <div class="card my-3" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">{{ choice.title }}</h5>
-              <h6 class="card-subtitle mb-2 text-body-secondary">{{ choice.author }}</h6>
-              <p class="card-text">{{ choice.description }}</p>
+              <h2 class="card-title">{{ choice.title }}</h2>
+              <h4 class="card-subtitle mb-2 text-body-secondary">{{ choice.author }}</h4>
+              <h5 class="card-text">{{ choice.description }}</h5>
               <h6 class="card-subtitle mb-2 text-body-secondary">{{ choice.date_updated|date:"F d, Y" }}</h6>
               <a href="{% url 'choices-detail' choice.pk %}" class="card-link">Go to this recipe</a>
             </div>

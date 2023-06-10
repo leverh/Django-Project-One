@@ -10,6 +10,7 @@ class Choice(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
+    preparation = models.TextField(max_length=1000, default='')
     def get_absolute_url(self):
         return reverse('choices-detail', kwargs={'pk': self.pk})
 
