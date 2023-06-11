@@ -8,6 +8,12 @@ class ChoiceForm(forms.ModelForm):
         model = Choice
         fields = ['title', 'description', 'preparation', 'picture']
 
+def clean_picture(self):
+        picture = self.cleaned_data.get('picture')
+        if picture:
+            pass
+        return picture
+
 
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()  # default required=True

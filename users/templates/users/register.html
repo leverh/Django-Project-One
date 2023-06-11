@@ -6,7 +6,7 @@
 
     <div class="container">
 
-        <form method="POST">
+        <form method="POST" action="{% url 'user-register' %}">
 
             {% csrf_token %}
             <fieldset class="form-group">
@@ -19,7 +19,8 @@
         </form>
 
         <div class="border-top pt-2">
-            <a href="">Sign in</a>
+            <a href="{% url 'user-login' %}">Sign in</a>
+
         </div>
 
     </div>
