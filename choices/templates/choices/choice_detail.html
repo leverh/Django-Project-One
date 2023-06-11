@@ -9,6 +9,7 @@
               <h5 class="card-title">{{ object.title }}</h5>
               <h6 class="card-subtitle mb-2 text-body-secondary">{{ object.author }}</h6>
               <p class="card-text">{{ object.description }}</p>
+              <p id="preparation-instructions" style="display: none;">{{ object.preparation }}</p>
               <h6 class="card-subtitle mb-2 text-body-secondary">
                 {{ object.date_updated|date:"F d, Y" }}</h6>
             </div>
@@ -23,3 +24,28 @@
     
 
 {% endblock content %} 
+<!--
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        $(document).ready(function(){
+            $("#preparation-instructions").hide();
+            $("#preparation-instructions").before("<button id='show-preparation-instructions' class='btn btn-outline-info'>Show preparation instructions</button>");
+            $("#show-preparation-instructions").click(function(){
+                $("#preparation-instructions").toggle();
+            });
+        });
+    </script>
+{% endblock scripts %}
+-->
+
+{% block extra_scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var preparationInstructions = document.getElementById('preparation-instructions');
+    if (preparationInstructions) {
+      preparationInstructions.style.display = 'block';
+    }
+  });
+</script>
+{% endblock extra_scripts %}
