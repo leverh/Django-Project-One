@@ -138,5 +138,4 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-
-#Please note that in a production environment, you may need to configure a separate file storage #backend such as Amazon S3 or Google Cloud Storage for serving media files.
+CLOUDINARY_URL = 'cloudinary://<271469932555916>:<zdcLW5JxZH5kXLCjK7QwwEVOh5ot>@<cloud_name>'

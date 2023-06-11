@@ -13,11 +13,6 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Add a healthy choice</legend>
                 {{ form|crispy }}
-                <div class="form-group">
-                    <label for="{{ form.picture.id_for_label }}">Picture</label>
-                    {{ form.picture }}
-                </div>
-                <!--{{ form.preparation|as_crispy_field }}-->
             </fieldset>
 
             <div class="form-group">
