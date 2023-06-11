@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="D:\Users\Learning\Code Institute Course\Django-Project-One\env"
+VIRTUAL_ENV="D:\Users\Learning\Code Institute Course\Django-Project-One - B\env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
