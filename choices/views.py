@@ -3,11 +3,24 @@ from .models import Choice
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
+from .forms import ChoiceForm
+from django.core.files.storage import default_storage
 
 class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Choice
-        fields = ['title', 'description', 'preparation']
+        fields = ['title', 'description', 'preparation', 'picture']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['picture'].required = False
+
+    def clean_picture(self):
+        picture = self.cleaned_data.get('picture')
+        if picture:
+            # Save the picture directly to the model instance
+            self.instance.picture = picture
+        return picture
 
 def home(request):
     choices = Choice.objects.all()

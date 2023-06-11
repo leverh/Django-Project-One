@@ -6,6 +6,7 @@ from django.urls import reverse
 
 class Choice(models.Model):
     title = models.CharField(max_length=100)
+    picture = models.ImageField(upload_to='choice_pictures', blank=True, null=True)
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)

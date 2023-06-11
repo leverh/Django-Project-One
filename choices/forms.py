@@ -6,7 +6,7 @@ from .models import Choice
 class ChoiceForm(forms.ModelForm):
     class Meta:
         model = Choice
-        fields = ['title', 'description', 'preparation']
+        fields = ['title', 'description', 'preparation', 'picture']
 
 
 class UserRegisterForm(UserCreationForm):

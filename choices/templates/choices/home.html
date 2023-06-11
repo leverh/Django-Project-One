@@ -6,6 +6,9 @@
     {% for choice in choices %}
         <div class="card my-3" style="width: 18rem;">
             <div class="card-body">
+              {% if choice.picture %}
+                    <img src="{{ choice.picture.url }}" class="card-img-top" alt="...">
+              {% endif %}
               <h2 class="card-title">{{ choice.title }}</h2>
               <h4 class="card-subtitle mb-2 text-body-secondary">{{ choice.author }}</h4>
               <h5 class="card-text">{{ choice.description }}</h5>
