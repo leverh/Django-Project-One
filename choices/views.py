@@ -67,23 +67,29 @@ class ChoiceCreateView(LoginRequiredMixin, CreateView):
 
 
 class ChoiceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    # ...
+    model = Choice
+    form_class = ChoiceForm
+    template_name = 'choices/choice_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
 
         picture = form.cleaned_data['picture']
         if picture:
-        
             upload_result = cloudinary.uploader.upload(picture)
 
-        
             print("Upload Result:", upload_result)
 
-        
             form.instance.picture = upload_result.get('public_id')
 
         return super().form_valid(form)
+
+    def test_func(self):
+        choice = self.get_object()
+        if self.request.user == choice.author:
+            return True
+        return False
+
 
 
 

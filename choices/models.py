@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from cloudinary.models import CloudinaryField
 
+
 # Create your models here.
 
 class Choice(models.Model):

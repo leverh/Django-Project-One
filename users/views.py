@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from . import forms
+from .forms import ProfilePictureForm
 from django.contrib.auth.decorators import login_required
+import cloudinary.uploader
+import cloudinary.api
 
 # Create your views here.
 def register(request):
@@ -16,6 +19,17 @@ def register(request):
         form = forms.UserRegisterForm()
     return render(request, 'users/register.html', {'form': form})
 
-@login_required()
+@login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    user = request.user
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            # Save the form to update the profile picture
+            form.save()
+            return redirect('profile')  # Redirect to the profile page after successful upload
+    else:
+        form = ProfilePictureForm(instance=user)
+    return render(request, 'users/profile.html', {'form': form, 'user': user})
+
+
