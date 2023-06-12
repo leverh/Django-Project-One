@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django import forms
 from .forms import ChoiceForm
 from django.core.files.storage import default_storage
+from cloudinary.forms import CloudinaryFileField
+import cloudinary.uploader
 
 class ChoiceForm(forms.ModelForm):
     class Meta:
@@ -49,22 +51,43 @@ class ChoiceCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super().form_valid(form)
-    
-class ChoiceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = Choice
-    form_class = ChoiceForm
-    template_name = 'choices/choice_form.html'
 
-    def test_func(self):
-        choice = self.get_object()
-        if self.request.user == choice.author:
-            return True
-        return False
+        # picture = form.cleaned_data['picture']
+        # if picture:
+        #     # Upload the image to Cloudinary and get the upload result
+        #     upload_result = cloudinary.uploader.upload(picture)
+
+        #     # Print the upload result for debugging
+        #     print("Upload Result:", upload_result)
+
+        #     # Save the Cloudinary public ID to the picture field
+        #     form.instance.picture = upload_result.get('public_id')
+
+        return super().form_valid(form)
+
+
+class ChoiceUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    # ...
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+
+        picture = form.cleaned_data['picture']
+        if picture:
+        
+            upload_result = cloudinary.uploader.upload(picture)
+
+        
+            print("Upload Result:", upload_result)
+
+        
+            form.instance.picture = upload_result.get('public_id')
+
         return super().form_valid(form)
+
+
+
+
     
 class ChoiceDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Choice

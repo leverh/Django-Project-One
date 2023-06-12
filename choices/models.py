@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
 class Choice(models.Model):
     title = models.CharField(max_length=100)
-    picture = models.ImageField(upload_to='choice_pictures', blank=True, null=True)
+    picture = CloudinaryField('image')
     description = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     date_posted = models.DateTimeField(auto_now_add=True)
